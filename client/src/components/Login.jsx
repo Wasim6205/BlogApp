@@ -1,17 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
 import "../App.css"
 
-const Register = () => {
+const Login = () => {
   return (
     <div className="signup_container">
       <div className="signup_form">
-        <h2>Sign Up</h2>
+        <h2>Login</h2>
         <form action="">
-            <div>
-              <label htmlFor="name">Username:</label>
-              <input type="text" placeholder="Enter username"/>
-            </div>
             <div>
               <label htmlFor="email">Email:</label>
               <input type="email" placeholder="Enter Email"/>
@@ -20,14 +16,14 @@ const Register = () => {
               <label htmlFor="password">Password:</label>
               <input type="password" placeholder="*************"/>
             </div>
-            <button className="signup_btn">Sign up</button>
+            <button className="signup_btn">Login</button>
         </form>
         <br></br>
-        <p>Already have account.</p>
-        <Link to="/login"><button>Login</button></Link>
+        <p>Not registered?</p>
+        <Link to="/register"><button>Signup</button></Link>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Login
