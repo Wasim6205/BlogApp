@@ -1,7 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { userContext } from "../App";
+import axios from "axios";
 
 const Navbar = () => {
+  const user = useContext(userContext)
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    axios.get("http://localhost:3001/logout")
+    .then(res => {
+      if(res.data === "Success")
+      navigate(0)
+    }).catch(err => console.log(err))
+  }
   return (
     <div className="navbar-header">
       <div>
@@ -11,16 +22,23 @@ const Navbar = () => {
         <a href="" className="link">
           Home
         </a>
-        <a href="" className="link">
+        <Link to="/create" className="link">
           Create
-        </a>
+        </Link>
         <a href="" className="link">
           Contact
         </a>
       </div>
-      <div>
+      {
+        user.username ?
+        <div>
+          <input className="btn_input" type="button" onClick={handleLogout} value="Logout"/>
+        </div>
+        :
+        <div>
         <h5><Link to="/register" className="link">Register/Login</Link></h5>
       </div>
+      }
     </div>
   );
 };

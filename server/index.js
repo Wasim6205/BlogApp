@@ -24,6 +24,26 @@ mongoose
   .then(() => console.log("db connection successfull"))
   .catch(() => console.log("issue in db connection"));
 
+const verifyUser = (req,res,next) => {
+  const token = req.cookies.token;
+  if(!token){
+    return res.json("The token is missing")
+  }else {
+    jwt.verify(token, "jwt-secret-key", (err, decoded) => {
+      if(err) {
+        return res.json("The token is wrong")
+      } else {
+        req.email = decoded.email;
+        req.username = decoded.username;
+        next()
+      }
+    })
+  }
+}
+app.get("/",verifyUser, (req,res) => {
+  return res.json({email: req.email, username: req.username, })
+})
+
 app.post("/register", (req, res) => {
   const { username, email, password } = req.body;
   bcrypt.hash(password, 10).then((hash) => {
@@ -52,6 +72,12 @@ app.post("/login", (req,res) => {
       res.json("User not exist")
     }
   })
+})
+
+
+app.get("/logout", (req,res) => {
+  res.clearCookie("token");
+  return res.json("Success")
 })
 
 app.listen(3001, () => {
