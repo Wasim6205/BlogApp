@@ -59,10 +59,65 @@
 }
 .signup_btn{
   margin-top: 8px;
+  cursor: pointer;
 }
 .btn_input{
   background-color: transparent;
   border: none;
   color: white;
   font-weight: bolder;
+  cursor: pointer;
+}
+
+.post_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+.post_form{
+  width: 50%;
+  border: 1px solid gray;
+  padding: 20px;
+}
+.post_form input, .post_form textarea, .post_form button{
+  width: 100%;
+  margin: 10px 0px;
+  padding: 8px;
+}
+.post_form .file{
+  border: 1px solid gray;
+}
+.post_form button{
+  cursor: pointer;
+  background-color: green;
+  color: white;
+}
+
+
+
+.post{
+  width: 80%;
+  margin: 10px;
+  border: 1px soid gray;
+  padding: 10px;
+  display: flex;
+  text-decoration: none;
+  color: black;
+}
+.post img {
+  width: 200px;
+  height: 200px;
+}
+.post .post_text{
+  margin-left: 10px;
+}
+.post_post{
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+.post_post img{
+  width: 100%;
+  height: 450px;
 }

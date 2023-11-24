@@ -4,41 +4,54 @@ import { userContext } from "../App";
 import axios from "axios";
 
 const Navbar = () => {
-  const user = useContext(userContext)
-  const navigate = useNavigate()
+  const user = useContext(userContext);
+  const navigate = useNavigate();
   const handleLogout = () => {
-    axios.get("http://localhost:3001/logout")
-    .then(res => {
-      if(res.data === "Success")
-      navigate(0)
-    }).catch(err => console.log(err))
-  }
+    axios
+      .get("http://localhost:3001/logout")
+      .then((res) => {
+        if (res.data === "Success") navigate(0);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="navbar-header">
       <div>
         <h3>Blog App</h3>
       </div>
       <div>
-        <a href="" className="link">
+        <Link to="/" className="link">
           Home
-        </a>
-        <Link to="/create" className="link">
-          Create
         </Link>
+        {user.username ? (
+          <Link to="/create" className="link">
+            Create
+          </Link>
+        ) : (
+          <></>
+        )}
         <a href="" className="link">
           Contact
         </a>
       </div>
-      {
-        user.username ?
+      {user.username ? (
         <div>
-          <input className="btn_input" type="button" onClick={handleLogout} value="Logout"/>
+          <input
+            className="btn_input"
+            type="button"
+            onClick={handleLogout}
+            value="Logout"
+          />
         </div>
-        :
+      ) : (
         <div>
-        <h5><Link to="/register" className="link">Register/Login</Link></h5>
-      </div>
-      }
+          <h5>
+            <Link to="/register" className="link">
+              Register/Login
+            </Link>
+          </h5>
+        </div>
+      )}
     </div>
   );
 };
